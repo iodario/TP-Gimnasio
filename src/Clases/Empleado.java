@@ -1,6 +1,6 @@
 package Clases;
 
-public class Empleado extends Persona {
+public abstract class Empleado extends Persona {
     private double sueldo;
     private String horarioTrabajo;
     private int horasExtras;
