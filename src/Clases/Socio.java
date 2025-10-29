@@ -4,7 +4,7 @@ import Enumeradores.TipoMembresia;
 
 
 
-public class Socio extends Persona {
+public class Socio extends Persona implements Claveable{
     private TipoMembresia membresia;
     private String objetivo;
     private boolean activo;
@@ -58,6 +58,12 @@ public class Socio extends Persona {
 
     public void setFrecuenciaSemanal(int frecuenciaSemanal) {
         this.frecuenciaSemanal = frecuenciaSemanal;
+    }
+
+
+    @Override
+    public String getClave() {
+        return getDni();
     }
 
     @Override
