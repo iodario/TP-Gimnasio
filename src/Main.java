@@ -1,6 +1,5 @@
 import Enumeradores.TipoMembresia;
 import Excepciones.UsuarioInvalidoException;
-import Gestores.GestionSocios;
 import Clases.*;
 
 
@@ -9,7 +8,7 @@ public class Main {
         System.out.println("Proyecto final - Gimnasio");
 
         try {
-            GestionSocios gestion = new GestionSocios();
+            GestionEmpleadp gestion = new GestionEmpleadp();
 
             Socio s1 = new Socio(1, "Pedro", "45654987", "Av. Libertad 123",
                     4811589, "pedro@gmail.com", false,

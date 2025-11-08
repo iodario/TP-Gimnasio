@@ -1,6 +1,9 @@
 package Clases;
 
-public abstract class Empleado extends Persona {
+import Interfaces.Claveable;
+
+public abstract class Empleado extends Persona implements Claveable {
+    private String matricula;
     private double sueldo;
     private String horarioTrabajo;
     private int horasExtras;
@@ -54,6 +57,11 @@ public abstract class Empleado extends Persona {
 
     public void setDiasVacaciones(int diasVacaciones) {
         this.diasVacaciones = diasVacaciones;
+    }
+
+    @Override
+    public String getClave() {
+        return getId();
     }
 
     @Override
