@@ -6,8 +6,8 @@ public class Entrenador extends Empleado {
     private Actividad especialidad;
     private String whatsapp;
 
-    public Entrenador(int id, String nombre, String dni, String direccion, int telefono, String email, boolean eliminado, double sueldo, String horarioTrabajo, int horasExtras, int feriadosTrabajados, int diasVacaciones, Actividad especialidad, String whatsapp) {
-        super(id, nombre, dni, direccion, telefono, email, eliminado, sueldo, horarioTrabajo, horasExtras, feriadosTrabajados, diasVacaciones);
+    public Entrenador(int id, String nombre, String dni, String direccion, int telefono, String email, boolean eliminado, String legajo, double sueldo, String horarioTrabajo, int horasExtras, int feriadosTrabajados, Actividad especialidad, String whatsapp) {
+        super(id, nombre, dni, direccion, telefono, email, eliminado, legajo, sueldo, horarioTrabajo, horasExtras, feriadosTrabajados, getDiasVacaciones());
         this.especialidad = especialidad;
         this.whatsapp = whatsapp;
     }

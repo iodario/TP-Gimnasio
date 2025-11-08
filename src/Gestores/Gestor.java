@@ -1,5 +1,6 @@
 package Gestores;
 
+import Clases.Socio;
 import Interfaces.Claveable;
 import Excepciones.DatoInvalidoException;
 import Excepciones.UsuarioInvalidoException;

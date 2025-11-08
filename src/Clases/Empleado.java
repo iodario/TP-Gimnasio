@@ -3,15 +3,17 @@ package Clases;
 import Interfaces.Claveable;
 
 public abstract class Empleado extends Persona implements Claveable {
-    private String matricula;
+
+    private String legajo;
     private double sueldo;
     private String horarioTrabajo;
     private int horasExtras;
     private int feriadosTrabajados;
     private int diasVacaciones;
 
-    public Empleado(int id, String nombre, String dni, String direccion, int telefono, String email, boolean eliminado, double sueldo, String horarioTrabajo, int horasExtras, int feriadosTrabajados, int diasVacaciones) {
+    public Empleado(int id, String nombre, String dni, String direccion, int telefono, String email, boolean eliminado, String legajo, double sueldo, String horarioTrabajo, int horasExtras, int feriadosTrabajados, int diasVacaciones) {
         super(id, nombre, dni, direccion, telefono, email, eliminado);
+        this.legajo = legajo;
         this.sueldo = sueldo;
         this.horarioTrabajo = horarioTrabajo;
         this.horasExtras = horasExtras;
@@ -59,9 +61,17 @@ public abstract class Empleado extends Persona implements Claveable {
         this.diasVacaciones = diasVacaciones;
     }
 
+    public String getLegajo() {
+        return legajo;
+    }
+
+    public void setLegajo(String legajo) {
+        this.legajo = legajo;
+    }
+
     @Override
     public String getClave() {
-        return getId();
+        return getLegajo();
     }
 
     @Override
