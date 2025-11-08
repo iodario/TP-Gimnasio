@@ -1,6 +1,6 @@
 package Enumeradores;
 
-public enum Especialidad {
+public enum Actividad {
     MUSCULACION,
     FUNCIONAL,
     SPINNING,
