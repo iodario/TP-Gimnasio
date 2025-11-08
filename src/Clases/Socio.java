@@ -1,10 +1,10 @@
 package Clases;
 
 import Enumeradores.TipoMembresia;
+import Interfaces.Claveable;
 
 
-
-public class Socio extends Persona implements Claveable{
+public class Socio extends Persona implements Claveable {
     private TipoMembresia membresia;
     private String objetivo;
     private boolean activo;

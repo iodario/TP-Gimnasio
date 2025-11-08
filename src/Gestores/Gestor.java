@@ -1,17 +1,21 @@
 package Gestores;
 
-import Clases.Claveable;
+import Interfaces.Claveable;
 import Excepciones.DatoInvalidoException;
 import Excepciones.UsuarioInvalidoException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GestionGimnasio <T extends Claveable> {
+public class Gestor<T extends Claveable> {
 
     private List<T> lista = new ArrayList<>();
 
     //buscar por clave
+    //busca una clave pasada por parametro si se encuentra en la lista de elementos
+    //devuelve null si: es nula, si esta en blanco o si no la encuentra
+    //si la encuentra devuelve el elemento que contiene esa clave, usando getClave( )
+
 
     public T buscarPorClave(String clave) {
         if (clave == null || clave.isBlank()) return null;
@@ -26,7 +30,7 @@ public class GestionGimnasio <T extends Claveable> {
     }
 
     //agregar entidad
-    public void agregar (T entidad)throws DatoInvalidoException {
+    public void agregar (T entidad) throws DatoInvalidoException {
         if (entidad == null) {
             throw new DatoInvalidoException("El dato ingresado es invalido");
         }
@@ -41,7 +45,6 @@ public class GestionGimnasio <T extends Claveable> {
 
     }
 
-        //eliminar por clave
 
 
     // Eliminar por clave (equivale a tu eliminarSocioPorDni)
