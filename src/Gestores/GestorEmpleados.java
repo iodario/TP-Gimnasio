@@ -1,31 +1,30 @@
 package Gestores;
 
 import Clases.Empleado;
-import Clases.Socio;
+import Excepciones.DatoInvalidoException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GestorEmpleados extends Gestor<Empleado> {
     //FUNCIONES
 
-    // ==buscar==//
-    public Empleado buscarEmpleadoPorDni(String dato){
-        return buscarPorClave(dato);
+    // ==Buscar Empleado==//
+    public Empleado buscarEmpleadoPorLegajo(String legajo){
+        return buscarPorClave(legajo);
     }
 
-    // ==agregar==//
-    public void agregarEmpleado(Empleado e) {
+    // ==Agregar Empleado==//
+    public void altaEmpleado(Empleado e) throws DatoInvalidoException {
         super.agregar(e);
     }
 
-    //==eliminar==//
-    public void eliminarEmpleadoPorDni(String dni) {
-        super.eliminarPorClave(dni);
+    //==Eliminar Empleado==//
+    public boolean bajaEmpleado(String legajo) {
+        return super.eliminarPorClave(legajo);
     }
-    public void listarEmpleados() { super.listar(); }
-
-
+    public List<Empleado> listarEmpleados() {
+        return super.listar();
+    }
 }
 
 

@@ -1,7 +1,9 @@
 package Gestores;
 
 import Clases.Socio;
-import Excepciones.UsuarioInvalidoException;
+import Excepciones.DatoInvalidoException;
+
+import java.util.List;
 
 
 public class GestionSocios extends Gestor<Socio> {
@@ -9,22 +11,26 @@ public class GestionSocios extends Gestor<Socio> {
 
     //FUNCIONES
 
-    // ==buscar==//
-    public Socio buscarSocioPorDni(String dato){
-        return buscarPorClave(dato);
+    // ==Buscar Socios==//
+    public Socio buscarSocioPorDni(String dni){
+        return buscarPorClave(dni);
     }
 
-    // ==agregar==//
-    public void agregarSocio(Socio s) {
+    // ==Agregar Socios==//
+    public void altaSocio(Socio s) throws DatoInvalidoException {
 
         super.agregar(s); // usa la lógica genérica (null, clave, duplicado)
     }
 
-    //==eliminar==//
-    public void eliminarSocioPorDni(String dni) {
-        super.eliminarPorClave(dni);
+    //==Eliminar Socios==//
+    public boolean bajaSocio(String dni) {
+        return super.eliminarPorClave(dni);
     }
-    public void listarSocios() { super.listar(); }
+
+    //==Listar Socios==//
+    public List<Socio> listarSocios() {
+        return super.listar();
+    }
 }
 
 

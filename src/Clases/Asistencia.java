@@ -9,11 +9,17 @@ public class Asistencia extends Socio{
     private int socioId;
     private LocalDateTime fechaHora;
 
-    public Asistencia(int id, String nombre, String dni, String direccion, int telefono, String email, boolean eliminado, TipoMembresia membresia, String objetivo, boolean activo, String agendaSemanal, int frecuenciaSemanal, int id1, int socioId, LocalDateTime fechaHora) {
-        super(id, nombre, dni, direccion, telefono, email, eliminado, membresia, objetivo, activo, agendaSemanal, frecuenciaSemanal);
+    public Asistencia(LocalDateTime fechaHora, int id, int socioId) {
+        this.fechaHora = fechaHora;
+        this.id = id;
+        this.socioId = socioId;
+    }
+
+    public Asistencia(int id, String nombre, String dni, String direccion, int telefono, String email, boolean eliminado, boolean activo, int frecuenciaSemanal, TipoMembresia membresia, String objetivo, LocalDateTime fechaHora, int id1, int socioId) {
+        super(id, nombre, dni, direccion, telefono, email, eliminado, activo, frecuenciaSemanal, membresia, objetivo);
+        this.fechaHora = fechaHora;
         this.id = id1;
         this.socioId = socioId;
-        this.fechaHora = fechaHora;
     }
 
     @Override
