@@ -2,75 +2,42 @@ package Clases;
 
 import Enumeradores.MedioDePago;
 import Enumeradores.TipoMembresia;
+import Interfaces.Claveable;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
 
-public class Pago extends Socio{
-    private int id;
-    private int socioId;
-    private YearMonth periodo;
+public class Pago implements Claveable {
+    private String id;
+    private String socioDni;
+    private String periodo;
     private double monto;
-    private MedioDePago medio;
-    private LocalDate fechaPago;
+    private String medioDePago;  // "EFECTIVO // TARJETA // TRANSFERENCIA
+    // TODO: Ver si agregamos: "fechaPago"
 
-    public Pago(int id, String nombre, String dni, String direccion, int telefono, String email, boolean eliminado, TipoMembresia membresia, String objetivo, boolean activo, String agendaSemanal, int frecuenciaSemanal, int id1, int socioId, YearMonth periodo, double monto, MedioDePago medio, LocalDate fechaPago) {
-        super(id, nombre, dni, direccion, telefono, email, eliminado, membresia, objetivo, activo, agendaSemanal, frecuenciaSemanal);
-        this.id = id1;
-        this.socioId = socioId;
-        this.periodo = periodo;
+
+    public Pago() {
+    }
+
+    public Pago(String id, String medioDePago, double monto, String periodo, String socioDni) {
+        this.id = id;
+        this.medioDePago = medioDePago;
         this.monto = monto;
-        this.medio = medio;
-        this.fechaPago = fechaPago;
+        this.periodo = periodo;
+        this.socioDni = socioDni;
     }
 
     @Override
-    public int getId() {
-        return id;
-    }
+    public String getClave() { return id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getSocioId() {
-        return socioId;
-    }
-
-    public void setSocioId(int socioId) {
-        this.socioId = socioId;
-    }
-
-    public YearMonth getPeriodo() {
-        return periodo;
-    }
-
-    public void setPeriodo(YearMonth periodo) {
-        this.periodo = periodo;
-    }
-
-    public double getMonto() {
-        return monto;
-    }
-
-    public void setMonto(double monto) {
-        this.monto = monto;
-    }
-
-    public MedioDePago getMedio() {
-        return medio;
-    }
-
-    public void setMedio(MedioDePago medio) {
-        this.medio = medio;
-    }
-
-    public LocalDate getFechaPago() {
-        return fechaPago;
-    }
-
-    public void setFechaPago(LocalDate fechaPago) {
-        this.fechaPago = fechaPago;
+    @Override
+    public String toString() {
+        return "Pago{" + id +
+                " socio=" + socioDni +
+                " periodo=" + periodo +
+                " monto=" + monto +
+                " medio=" + medioDePago +
+                "}";
     }
 
 }

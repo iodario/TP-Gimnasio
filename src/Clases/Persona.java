@@ -9,6 +9,13 @@ public abstract class Persona {
     private String email;
     private boolean eliminado;
 
+    // Constructor vacío necesario para permitir crear objetos sin parámetros,
+    // facilitar la herencia (llamadas a super()) y el uso de librerías o gestores
+    // que instancian las clases de forma automática.
+
+    public Persona() {
+    }
+
     public Persona(int id, String nombre, String dni, String direccion, int telefono, String email, boolean eliminado) {
         this.id = id;
         this.nombre = nombre;
@@ -69,6 +76,10 @@ public abstract class Persona {
 
     public void setEliminado(boolean eliminado) {
         this.eliminado = eliminado;
+    }
+
+    public String descripcionCorta() {
+        return nombre + " (DNI: " + dni + ")";
     }
 
     @Override

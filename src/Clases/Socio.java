@@ -8,15 +8,32 @@ public class Socio extends Persona implements Claveable {
     private TipoMembresia membresia;
     private String objetivo;
     private boolean activo;
-    private String agendaSemanal;
     private int frecuenciaSemanal;
 
-    public Socio(int id, String nombre, String dni, String direccion, int telefono, String email, boolean eliminado, TipoMembresia membresia, String objetivo, boolean activo, String agendaSemanal, int frecuenciaSemanal) {
+    public Socio() {
+    }
+
+    public Socio(int id, String nombre, String dni, String direccion, int telefono, String email, boolean eliminado, boolean activo, int frecuenciaSemanal, TipoMembresia membresia, String objetivo) {
         super(id, nombre, dni, direccion, telefono, email, eliminado);
+        this.activo = activo;
+        this.frecuenciaSemanal = frecuenciaSemanal;
         this.membresia = membresia;
         this.objetivo = objetivo;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
         this.activo = activo;
-        this.agendaSemanal = agendaSemanal;
+    }
+
+    public int getFrecuenciaSemanal() {
+        return frecuenciaSemanal;
+    }
+
+    public void setFrecuenciaSemanal(int frecuenciaSemanal) {
         this.frecuenciaSemanal = frecuenciaSemanal;
     }
 
@@ -36,31 +53,6 @@ public class Socio extends Persona implements Claveable {
         this.objetivo = objetivo;
     }
 
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
-
-    public String getAgendaSemanal() {
-        return agendaSemanal;
-    }
-
-    public void setAgendaSemanal(String agendaSemanal) {
-        this.agendaSemanal = agendaSemanal;
-    }
-
-    public int getFrecuenciaSemanal() {
-        return frecuenciaSemanal;
-    }
-
-    public void setFrecuenciaSemanal(int frecuenciaSemanal) {
-        this.frecuenciaSemanal = frecuenciaSemanal;
-    }
-
-
     @Override
     public String getClave() {
         return getDni();
@@ -68,12 +60,11 @@ public class Socio extends Persona implements Claveable {
 
     @Override
     public String toString() {
-        return "Socio{" +
-                "membresia=" + membresia +
-                ", objetivo='" + objetivo + '\'' +
-                ", activo=" + activo +
-                ", agendaSemanal='" + agendaSemanal + '\'' +
-                ", frecuenciaSemanal=" + frecuenciaSemanal +
-                '}';
+        return "\n ==== SOCIO ==== \n" +
+                getNombre() +
+                "\n - Dni: " + getDni() +
+                "\n - Objetivo: " + objetivo +
+                "\n - Tipo de Membresia: " + membresia +
+                "\n - Activo: " + activo;
     }
 }
