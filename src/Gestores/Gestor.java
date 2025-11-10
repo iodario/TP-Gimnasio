@@ -1,9 +1,7 @@
 package Gestores;
 
-import Clases.Socio;
 import Interfaces.Claveable;
 import Excepciones.DatoInvalidoException;
-import Excepciones.UsuarioInvalidoException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +10,10 @@ public class Gestor<T extends Claveable> {
 
     private List<T> lista = new ArrayList<>();
 
-    //buscar por clave
-    //busca una clave pasada por parametro si se encuentra en la lista de elementos
-    //devuelve null si: es nula, si esta en blanco o si no la encuentra
-    //si la encuentra devuelve el elemento que contiene esa clave, usando getClave( )
+    /*buscar por clave
+      busca una clave pasada por parametro si se encuentra en la lista de elementos
+      devuelve null si: es nula, si esta en blanco o si no la encuentra
+      si la encuentra devuelve el elemento que contiene esa clave, usando getClave( )*/
 
 
     public T buscarPorClave(String clave) {
