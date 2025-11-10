@@ -1,9 +1,7 @@
 import Clases.*;
 import Enumeradores.TipoMembresia;
 import Excepciones.DatoInvalidoException;
-import Gestores.GestionSocios;
-import Gestores.GestorEmpleados;
-import Gestores.Gestor;
+import Gestores.*;
 
 import java.util.List;
 import java.util.Scanner;
@@ -15,69 +13,142 @@ public class Main {
     // Repos/gestores en memoria
     private static final GestionSocios socios = new GestionSocios();
     private static final GestorEmpleados empleados = new GestorEmpleados();
-    private static final Gestor<ClaseGrupal> clases = new Gestor<ClaseGrupal>();
-    private static final Gestor<Reserva> reservas = new Gestor<Reserva>();
-    private static final Gestor<Pago> pagos = new Gestor<Pago>();
+    private static final Gestor<ClaseGrupal> clases = new Gestor<>();
+    private static final Gestor<Reserva> reservas = new Gestor<>();
+    private static final Gestor<Pago> pagos = new Gestor<>();
+    private static GestorRutina gestorRutinas; // inicializamos en main()
 
     public static void main(String[] args) {
-        int op;
+
+        // Inicializa gestorRutinas (usa lista viva de socios)
+        gestorRutinas = new GestorRutina(socios.listarSocios());
+
+        int opcion;
         do {
-            mostrarMenu();
-            op = leerEntero("Opción: ");
+            System.out.println("\n ===== GIMNASIO FITLIFE =====");
+            System.out.println("1) Socios");
+            System.out.println("2) Entrenadores");
+            System.out.println("3) Recepcionista");
+            System.out.println("4) Rutinas");
+            System.out.println("0) Salir");
+            opcion = leerEntero("Opción: ");
+
             try {
-                switch (op) {
-                    case 1: altaSocio(); break;
-                    case 2: listarSocios(); break;
-                    case 3: buscarSocio(); break;
-                    case 4: eliminarSocio(); break;
-
-                    case 5: altaEmpleado(); break;
-                    case 6: listarEmpleados(); break;
-                    case 7: buscarEmpleado(); break;
-                    case 8: eliminarEmpleado(); break;
-
-                    case 9: altaClase(); break;
-                    case 10: listarClases(); break;
-
-                    case 11: reservarClase(); break;
-                    case 12: listarReservas(); break;
-                    case 13: cancelarReserva(); break;
-
-                    case 14: registrarPago(); break;
-                    case 15: listarPagos(); break;
-
-                    case 0: System.out.println("Saliendo..."); break;
-                    default: System.out.println("Opción inválida");
+                switch (opcion) {
+                    case 1 -> menuSocios();
+                    case 2 -> menuEmpleados();
+                    case 3 -> menuRecepcionista();
+                    case 4 -> menuRutinas();
+                    case 0 -> System.out.println("Saliendo...");
+                    default -> System.out.println("Opción inválida");
                 }
             } catch (DatoInvalidoException e) {
                 System.out.println("Error: " + e.getMessage());
             } catch (Exception e) {
                 System.out.println("Error inesperado: " + e.getMessage());
             }
+        } while (opcion != 0);
+    }
+
+    // ======== SUBMENÚS ========
+
+    private static void menuSocios() throws DatoInvalidoException {
+        int op;
+        do {
+            System.out.println("\n--- SOCIOS ---");
+            System.out.println("1) Alta socio");
+            System.out.println("2) Listar socios");
+            System.out.println("3) Buscar socio");
+            System.out.println("4) Eliminar socio");
+            System.out.println("0) Volver");
+            op = leerEntero("Opción: ");
+
+            switch (op) {
+                case 1 -> altaSocio();
+                case 2 -> listarSocios();
+                case 3 -> buscarSocio();
+                case 4 -> eliminarSocio();
+                case 0 -> {}
+                default -> System.out.println("Opción inválida");
+            }
         } while (op != 0);
     }
 
-    private static void mostrarMenu() {
-        System.out.println("\n===== Gimnasio – Menú =====");
-        System.out.println("1) Alta socio");
-        System.out.println("2) Listar socios");
-        System.out.println("3) Buscar socio");
-        System.out.println("4) Eliminar socio");
-        System.out.println("5) Alta empleado/entrenador");
-        System.out.println("6) Listar empleados");
-        System.out.println("7) Buscar empleado");
-        System.out.println("8) Eliminar empleado");
-        System.out.println("9) Alta clase grupal");
-        System.out.println("10) Listar clases");
-        System.out.println("11) Reservar clase para socio");
-        System.out.println("12) Listar reservas");
-        System.out.println("13) Cancelar reserva");
-        System.out.println("14) Registrar pago");
-        System.out.println("15) Listar pagos");
-        System.out.println("0) Salir");
+    private static void menuEmpleados() throws DatoInvalidoException {
+        int op;
+        do {
+            System.out.println("\n--- ENTRENADORES / EMPLEADOS ---");
+            System.out.println("1) Alta empleado");
+            System.out.println("2) Listar empleados");
+            System.out.println("3) Buscar empleado");
+            System.out.println("4) Eliminar empleado");
+            System.out.println("0) Volver");
+            op = leerEntero("Opción: ");
+
+            switch (op) {
+                case 1 -> altaEmpleado();
+                case 2 -> listarEmpleados();
+                case 3 -> buscarEmpleado();
+                case 4 -> eliminarEmpleado();
+                case 0 -> {}
+                default -> System.out.println("Opción inválida");
+            }
+        } while (op != 0);
     }
 
-    // ======== Socios ========
+    private static void menuRecepcionista() throws DatoInvalidoException {
+        int op;
+        do {
+            System.out.println("\n--- RECEPCIONISTA ---");
+            System.out.println("1) Alta clase grupal");
+            System.out.println("2) Listar clases");
+            System.out.println("3) Reservar clase");
+            System.out.println("4) Listar reservas");
+            System.out.println("5) Cancelar reserva");
+            System.out.println("6) Registrar pago");
+            System.out.println("7) Listar pagos");
+            System.out.println("0) Volver");
+            op = leerEntero("Opción: ");
+
+            switch (op) {
+                case 1 -> altaClase();
+                case 2 -> listarClases();
+                case 3 -> reservarClase();
+                case 4 -> listarReservas();
+                case 5 -> cancelarReserva();
+                case 6 -> registrarPago();
+                case 7 -> listarPagos();
+                case 0 -> {}
+                default -> System.out.println("Opción inválida");
+            }
+        } while (op != 0);
+    }
+
+    private static void menuRutinas() throws DatoInvalidoException {
+        int op;
+        do {
+            System.out.println("\n--- RUTINAS ---");
+            System.out.println("1) Crear rutina para socio");
+            System.out.println("2) Listar rutinas de un socio");
+            System.out.println("3) Agregar ejercicio a una rutina");
+            System.out.println("4) Listar ejercicios de una rutina");
+            System.out.println("5) Eliminar ejercicio de una rutina");
+            System.out.println("0) Volver");
+            op = leerEntero("Opción: ");
+
+            switch (op) {
+                case 1 -> crearRutina();
+                case 2 -> listarRutinasPorSocio();
+                case 3 -> agregarEjercicioARutina();
+                case 4 -> listarEjerciciosDeRutina();
+                case 5 -> eliminarEjercicioDeRutina();
+                case 0 -> {}
+                default -> System.out.println("Opción inválida");
+            }
+        } while (op != 0);
+    }
+
+    // ======== SOCIOS ========
     private static void altaSocio() throws DatoInvalidoException {
         System.out.println("\n-- Alta socio --");
         int id = leerEntero("ID interno: ");
@@ -87,22 +158,21 @@ public class Main {
         String tel = leerLinea("Teléfono: ");
         String mail = leerLinea("Email: ");
         String mem = leerLinea("Membresía (BASICA/MEDIA/FULL): ").toUpperCase();
-        boolean activo = true;
         int freq = leerEntero("Frecuencia semanal: ");
 
         TipoMembresia tipo;
         try { tipo = TipoMembresia.valueOf(mem); } catch(Exception e) { tipo = TipoMembresia.BASICA; }
 
-        Socio s = new Socio(id, nombre, dni, dir, 223462462, mail, false, activo, freq, tipo, "Tren Superior");
+        Socio s = new Socio(id, nombre, dni, dir, 223462462, mail, false, true, freq, tipo, "Tren Superior");
         socios.altaSocio(s);
-        System.out.println("Socio cargado.");
+        System.out.println("Socio cargado correctamente.");
     }
 
     private static void listarSocios() {
         System.out.println("\n-- Socios --");
         List<Socio> lista = socios.listarSocios();
         if (lista.isEmpty()) System.out.println("(sin datos)");
-        for (int i = 0; i < lista.size(); i++) System.out.println("- " + lista.get(i));
+        else lista.forEach(System.out::println);
     }
 
     private static void buscarSocio() {
@@ -117,9 +187,9 @@ public class Main {
         System.out.println(ok ? "Eliminado" : "No se encontró");
     }
 
-    // ======== Empleados / Entrenadores ========
+    // ======== EMPLEADOS ========
     private static void altaEmpleado() throws DatoInvalidoException {
-        System.out.println("\n-- Alta empleado/entrenador --");
+        System.out.println("\n-- Alta empleado --");
         int id = leerEntero("ID interno: ");
         String nombre = leerLinea("Nombre: ");
         String dni = leerLinea("DNI: ");
@@ -128,7 +198,7 @@ public class Main {
         String mail = leerLinea("Email: ");
         String legajo = leerLinea("Legajo (clave): ");
         double sueldo = leerDouble("Sueldo: ");
-        String especialidad = leerLinea("Especialidad (texto): ");
+        String especialidad = leerLinea("Especialidad: ");
 
         Entrenador e = new Entrenador(id, nombre, dni, dir, 22364642, mail, false, legajo, sueldo, especialidad);
         empleados.altaEmpleado(e);
@@ -139,7 +209,7 @@ public class Main {
         System.out.println("\n-- Empleados --");
         List<Empleado> lista = empleados.listarEmpleados();
         if (lista.isEmpty()) System.out.println("(sin datos)");
-        for (int i = 0; i < lista.size(); i++) System.out.println("- " + lista.get(i));
+        else lista.forEach(System.out::println);
     }
 
     private static void buscarEmpleado() {
@@ -154,13 +224,88 @@ public class Main {
         System.out.println(ok ? "Eliminado" : "No se encontró");
     }
 
-    // ======== Clases / Reservas ========
+    // ======== RUTINAS / EJERCICIOS ========
+
+    private static void crearRutina() throws DatoInvalidoException {
+        System.out.println("\n-- Crear rutina --");
+        String claveSocio = leerLinea("DNI/clave socio: ");
+        String nombre = leerLinea("Nombre de rutina: ");
+        String desc = leerLinea("Descripción: ");
+        String entrenador = leerLinea("Entrenador: ");
+
+        Rutina r = new Rutina(nombre, desc, claveSocio, entrenador);
+        gestorRutinas.agregar(r);
+        System.out.println("Rutina creada: " + r.toString());
+    }
+
+    private static void listarRutinasPorSocio() {
+        String claveSocio = leerLinea("DNI/clave socio: ");
+        List<Rutina> lista = gestorRutinas.buscarRutinasPorSocio(claveSocio);
+        if (lista.isEmpty()) System.out.println("(sin rutinas)");
+        else lista.forEach(r -> System.out.println("• " + r.toString()));
+    }
+
+    private static Rutina obtenerRutinaPorNombre(String claveSocio, String nombreRutina) {
+        String claveRutina = (claveSocio + "-" + nombreRutina).toLowerCase();
+        return gestorRutinas.buscarPorClave(claveRutina);
+    }
+
+    private static void agregarEjercicioARutina() throws DatoInvalidoException {
+        System.out.println("\n-- Agregar ejercicio a rutina --");
+        String claveSocio = leerLinea("DNI/clave socio: ");
+        String nombreRutina = leerLinea("Nombre de rutina: ");
+        Rutina r = obtenerRutinaPorNombre(claveSocio, nombreRutina);
+        if (r == null) throw new DatoInvalidoException("Rutina no encontrada");
+
+        GestorEjercicio ge = new GestorEjercicio(r);
+
+        String nom = leerLinea("Ejercicio: ");
+        String des = leerLinea("Descripción: ");
+        int series = leerEntero("Series: ");
+        int reps = leerEntero("Repeticiones: ");
+
+        ge.agregar(new Ejercicio(nom, des, series, reps));
+        System.out.println("Ejercicio agregado correctamente.");
+    }
+
+    private static void listarEjerciciosDeRutina() {
+        System.out.println("\n-- Ejercicios de rutina --");
+        String claveSocio = leerLinea("DNI/clave socio: ");
+        String nombreRutina = leerLinea("Nombre de rutina: ");
+        Rutina r = obtenerRutinaPorNombre(claveSocio, nombreRutina);
+        if (r == null) {
+            System.out.println("Rutina no encontrada");
+            return;
+        }
+        GestorEjercicio ge = new GestorEjercicio(r);
+        List<Ejercicio> lista = ge.listar();
+        if (lista.isEmpty()) System.out.println("(sin ejercicios)");
+        else lista.forEach(e -> System.out.println("• " + e));
+    }
+
+    private static void eliminarEjercicioDeRutina() {
+        System.out.println("\n-- Eliminar ejercicio --");
+        String claveSocio = leerLinea("DNI/clave socio: ");
+        String nombreRutina = leerLinea("Nombre de rutina: ");
+        String nombreEj = leerLinea("Nombre de ejercicio: ");
+        Rutina r = obtenerRutinaPorNombre(claveSocio, nombreRutina);
+        if (r == null) {
+            System.out.println("Rutina no encontrada");
+            return;
+        }
+        GestorEjercicio ge = new GestorEjercicio(r);
+        boolean ok = ge.eliminarPorClave(nombreEj.toLowerCase());
+        System.out.println(ok ? "Ejercicio eliminado." : "No se encontró ese ejercicio.");
+    }
+
+    // ======== CLASES / RESERVAS / PAGOS ========
+
     private static void altaClase() throws DatoInvalidoException {
         System.out.println("\n-- Alta clase grupal --");
-        String id = leerLinea("ID clase (texto): ");
+        String id = leerLinea("ID clase: ");
         String nombre = leerLinea("Nombre: ");
         String actividad = leerLinea("Actividad: ");
-        String dia = leerLinea("Día (texto): ");
+        String dia = leerLinea("Día: ");
         String hora = leerLinea("Hora (HH:mm): ");
         int cupo = leerEntero("Cupo máximo: ");
         String legajo = leerLinea("Legajo entrenador: ");
@@ -174,7 +319,7 @@ public class Main {
         System.out.println("\n-- Clases --");
         List<ClaseGrupal> lista = clases.listar();
         if (lista.isEmpty()) System.out.println("(sin datos)");
-        for (int i = 0; i < lista.size(); i++) System.out.println("- " + lista.get(i));
+        else lista.forEach(System.out::println);
     }
 
     private static void reservarClase() throws DatoInvalidoException {
@@ -182,19 +327,16 @@ public class Main {
         String claseId = leerLinea("ID clase: ");
         String dni = leerLinea("DNI socio: ");
 
-        // validaciones simples
         ClaseGrupal c = clases.buscarPorClave(claseId);
         if (c == null) throw new DatoInvalidoException("Clase inexistente");
         Socio s = socios.buscarSocioPorDni(dni);
         if (s == null || !s.isActivo()) throw new DatoInvalidoException("Socio inexistente o inactivo");
         if (c.cupoDisponible() <= 0) throw new DatoInvalidoException("Cupo completo");
 
-        // evitar duplicado
         List<Reserva> rs = c.getReservas();
-        for (int i = 0; i < rs.size(); i++) {
-            if (dni.equalsIgnoreCase(rs.get(i).getSocioDni()) && rs.get(i).isActiva()) {
+        for (Reserva re : rs) {
+            if (dni.equalsIgnoreCase(re.getSocioDni()) && re.isActiva())
                 throw new DatoInvalidoException("El socio ya tiene reserva activa");
-            }
         }
 
         String rid = claseId + "-" + (rs.size() + 1);
@@ -208,7 +350,7 @@ public class Main {
         System.out.println("\n-- Reservas --");
         List<Reserva> lista = reservas.listar();
         if (lista.isEmpty()) System.out.println("(sin datos)");
-        for (int i = 0; i < lista.size(); i++) System.out.println("- " + lista.get(i));
+        else lista.forEach(System.out::println);
     }
 
     private static void cancelarReserva() {
@@ -217,12 +359,9 @@ public class Main {
         if (r != null) {
             r.cancelarReserva();
             System.out.println("Cancelada: " + r);
-        } else {
-            System.out.println("No encontrada");
-        }
+        } else System.out.println("No encontrada");
     }
 
-    // ======== Pagos ========
     private static void registrarPago() throws DatoInvalidoException {
         System.out.println("\n-- Registrar pago --");
         String id = leerLinea("ID pago: ");
@@ -242,20 +381,22 @@ public class Main {
         System.out.println("\n-- Pagos --");
         List<Pago> lista = pagos.listar();
         if (lista.isEmpty()) System.out.println("(sin datos)");
-        for (int i = 0; i < lista.size(); i++) System.out.println("- " + lista.get(i));
+        else lista.forEach(System.out::println);
     }
 
-    // ======== Utiles entrada ========
+    // ======== Utiles de entrada ========
     private static String leerLinea(String msg) {
         System.out.print(msg);
         return sc.nextLine().trim();
     }
+
     private static int leerEntero(String msg) {
         try {
             System.out.print(msg);
             return Integer.parseInt(sc.nextLine().trim());
         } catch (Exception e) { return 0; }
     }
+
     private static double leerDouble(String msg) {
         try {
             System.out.print(msg);

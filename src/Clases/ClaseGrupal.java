@@ -117,10 +117,13 @@ public class ClaseGrupal implements Claveable {
 
     @Override
     public String toString() {
-        return "Clase{" +
+        return "\n ==== CLASE EN GRUPO ====" +
                 "\n - ID: " + id +
-                "\n - Nombre: " + nombre + " (" + actividad + " " + dia + " " + hora +
-                "), cupo=" + cupoMax + ", disp=" + cupoDisponible() + "}";
+                "\n - Nombre: " + nombre +
+                "\n - Actividad: " + actividad +
+                "\n - Dia y Horario: " + dia + ", " + hora +
+                "\n - Cupo: " + cupoMax +
+                "\n - Disponibilidad: " + cupoDisponible() + " Cupos";
     }
 
 }
