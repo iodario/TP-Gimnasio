@@ -57,11 +57,13 @@ public class Main {
         } while (opcion != 0);
     }
 
+
     // ======== GUARDAR EN JSON ========= //
     private static void guardarTodo() {
         System.out.println("\n--- Guardando datos en archivos JSON... ---");
         socios.guardarSociosEnJSON();
-        System.out.println(" \n--- Guardado correctamente. ");
+        empleados.guardarEmpleadosEnJSON();
+        System.out.println("--- Guardado completado ---");
     }
 
 
@@ -214,16 +216,25 @@ public class Main {
         System.out.println("\n-- Alta empleado --");
         String nombre = leerLinea("Nombre: ");
         String dni = leerLinea("DNI: ");
-        String dir = leerLinea("Dirección: ");
-        String tel = leerLinea("Teléfono: ");
-        String mail = leerLinea("Email: ");
-        String legajo = leerLinea("Legajo (clave): ");
+        int telefono = leerEntero("Teléfono: ");
+        String legajo = leerLinea("Legajo: ");
         double sueldo = leerDouble("Sueldo: ");
-        String especialidad = leerLinea("Especialidad: ");
 
-        Entrenador e = new Entrenador(nombre, dni, 22364642, false, legajo, sueldo, especialidad);
-        empleados.altaEmpleado(e);
-        System.out.println("Empleado cargado.");
+        System.out.println("Tipo de empleado:");
+        System.out.println("1) Entrenador");
+        System.out.println("2) Recepcionista");
+        int tipo = leerEntero("Opción: ");
+
+        Empleado empleado;
+        if (tipo == 1) {
+            String especialidad = leerLinea("Especialidad: ");
+            empleado = new Entrenador(nombre, dni, telefono, false, legajo, sueldo, especialidad);
+        } else {
+            empleado = new Recepcionista(nombre, dni, telefono, false, legajo, sueldo);
+        }
+
+        empleados.altaEmpleado(empleado);
+        System.out.println("✓ Empleado cargado correctamente.");
     }
 
     private static void listarEmpleados() {
