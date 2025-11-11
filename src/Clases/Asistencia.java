@@ -4,25 +4,29 @@ import Enumeradores.TipoMembresia;
 
 import java.time.LocalDateTime;
 
-public class Asistencia extends Socio{
+public class Asistencia extends Socio {
     private int id;
     private int socioId;
     private LocalDateTime fechaHora;
 
-    public Asistencia(LocalDateTime fechaHora, int id, int socioId) {
-        this.fechaHora = fechaHora;
+
+    public Asistencia(String nombre,
+                      String dni,
+                      int telefono,
+                      boolean eliminado,
+                      boolean activo,
+                      int frecuenciaSemanal,
+                      TipoMembresia membresia,
+                      String objetivo,
+                      int id,
+                      int socioId,
+                      LocalDateTime fechaHora) {
+        super(nombre, dni, telefono, eliminado, activo, frecuenciaSemanal, membresia, objetivo);
         this.id = id;
         this.socioId = socioId;
-    }
-
-    public Asistencia(int id, String nombre, String dni, String direccion, int telefono, String email, boolean eliminado, boolean activo, int frecuenciaSemanal, TipoMembresia membresia, String objetivo, LocalDateTime fechaHora, int id1, int socioId) {
-        super(id, nombre, dni, direccion, telefono, email, eliminado, activo, frecuenciaSemanal, membresia, objetivo);
         this.fechaHora = fechaHora;
-        this.id = id1;
-        this.socioId = socioId;
     }
 
-    @Override
     public int getId() {
         return id;
     }
@@ -47,3 +51,4 @@ public class Asistencia extends Socio{
         this.fechaHora = fechaHora;
     }
 }
+

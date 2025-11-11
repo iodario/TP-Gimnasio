@@ -5,8 +5,8 @@ public class Recepcionista extends Empleado {
     public Recepcionista() {
     }
 
-    public Recepcionista(int id, String nombre, String dni, String direccion, int telefono, String email, boolean eliminado, String legajo, double sueldo) {
-        super(id, nombre, dni, direccion, telefono, email, eliminado, legajo, sueldo);
+    public Recepcionista(String nombre, String dni, int telefono, boolean eliminado, String legajo, double sueldo) {
+        super(nombre, dni, telefono, eliminado, legajo, sueldo);
     }
 
     @Override

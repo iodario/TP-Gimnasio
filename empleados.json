@@ -1,0 +1,33 @@
+{
+  "empleados": [
+    {
+      "tipo": "ENTRENADOR",
+      "nombre": "Roberto Silva",
+      "dni": "22333444",
+      "telefono": 1155667788,
+      "eliminado": false,
+      "legajo": "ENT001",
+      "sueldo": 150000.0,
+      "especialidad": "Crossfit"
+    },
+    {
+      "tipo": "ENTRENADOR",
+      "nombre": "Ana Martínez",
+      "dni": "33444555",
+      "telefono": 1199887766,
+      "eliminado": false,
+      "legajo": "ENT002",
+      "sueldo": 145000.0,
+      "especialidad": "Yoga"
+    },
+    {
+      "tipo": "RECEPCIONISTA",
+      "nombre": "Laura Díaz",
+      "dni": "44555666",
+      "telefono": 1133445566,
+      "eliminado": false,
+      "legajo": "REC001",
+      "sueldo": 120000.0
+    }
+  ]
+}

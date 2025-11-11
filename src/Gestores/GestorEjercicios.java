@@ -11,11 +11,11 @@ import java.util.List;
  * Extiende Gestor<Ejercicio> para reutilizar agregar/buscar/eliminar/listar.
  * Mantiene sincronizada la lista interna de la Rutina.
  */
-public class GestorEjercicio extends Gestor<Ejercicio> {
+public class GestorEjercicios extends Gestor<Ejercicio> {
 
     private Rutina rutina;
 
-    public GestorEjercicio(Rutina rutina) {
+    public GestorEjercicios(Rutina rutina) {
         super();
         this.rutina = rutina;
 
@@ -27,6 +27,8 @@ public class GestorEjercicio extends Gestor<Ejercicio> {
             }
         }
     }
+
+
 
 
     public Rutina getRutina() {

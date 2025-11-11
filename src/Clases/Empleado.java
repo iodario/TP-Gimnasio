@@ -11,8 +11,8 @@ public abstract class Empleado extends Persona implements Claveable {
 
     }
 
-    public Empleado(int id, String nombre, String dni, String direccion, int telefono, String email, boolean eliminado, String legajo, double sueldo) {
-        super(id, nombre, dni, direccion, telefono, email, eliminado);
+    public Empleado(String nombre, String dni, int telefono, boolean eliminado, String legajo, double sueldo) {
+        super(nombre, dni, telefono, eliminado);
         this.legajo = legajo;
         this.sueldo = sueldo;
     }

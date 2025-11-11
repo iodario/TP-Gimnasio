@@ -8,20 +8,24 @@ import java.util.Scanner;
 
 public class Main {
 
+
+
+    private static final String archivo = "gimnasio.json";
+
     private static final Scanner sc = new Scanner(System.in);
 
     // Repos/gestores en memoria
-    private static final GestionSocios socios = new GestionSocios();
+    private static final GestorSocios socios = new GestorSocios();
     private static final GestorEmpleados empleados = new GestorEmpleados();
     private static final Gestor<ClaseGrupal> clases = new Gestor<>();
     private static final Gestor<Reserva> reservas = new Gestor<>();
     private static final Gestor<Pago> pagos = new Gestor<>();
-    private static GestorRutina gestorRutinas; // inicializamos en main()
+    private static GestorRutinas gestorRutinas = new GestorRutinas(socios);
+
 
     public static void main(String[] args) {
 
-        // Inicializa gestorRutinas (usa lista viva de socios)
-        gestorRutinas = new GestorRutina(socios.listarSocios());
+
 
         int opcion;
         do {
@@ -47,8 +51,20 @@ public class Main {
             } catch (Exception e) {
                 System.out.println("Error inesperado: " + e.getMessage());
             }
+
+            guardarTodo();
+
         } while (opcion != 0);
     }
+
+    // ======== GUARDAR EN JSON ========= //
+    private static void guardarTodo() {
+        System.out.println("\n--- Guardando datos en archivos JSON... ---");
+        socios.guardarSociosEnJSON();
+        System.out.println(" \n--- Guardado correctamente. ");
+    }
+
+
 
     // ======== SUBMENÚS ========
 
@@ -133,6 +149,7 @@ public class Main {
             System.out.println("3) Agregar ejercicio a una rutina");
             System.out.println("4) Listar ejercicios de una rutina");
             System.out.println("5) Eliminar ejercicio de una rutina");
+            System.out.println("6) Listar todas las rutinas");
             System.out.println("0) Volver");
             op = leerEntero("Opción: ");
 
@@ -142,6 +159,7 @@ public class Main {
                 case 3 -> agregarEjercicioARutina();
                 case 4 -> listarEjerciciosDeRutina();
                 case 5 -> eliminarEjercicioDeRutina();
+                case 6 -> gestorRutinas.listarRutinas();
                 case 0 -> {}
                 default -> System.out.println("Opción inválida");
             }
@@ -151,23 +169,27 @@ public class Main {
     // ======== SOCIOS ========
     private static void altaSocio() throws DatoInvalidoException {
         System.out.println("\n-- Alta socio --");
-        int id = leerEntero("ID interno: ");
         String nombre = leerLinea("Nombre: ");
         String dni = leerLinea("DNI: ");
-        String dir = leerLinea("Dirección: ");
-        String tel = leerLinea("Teléfono: ");
-        String mail = leerLinea("Email: ");
-        String mem = leerLinea("Membresía (BASICA/MEDIA/FULL): ").toUpperCase();
+        int telefono = leerEntero("Teléfono: "); //
+        String objetivo = leerLinea("Objetivo: "); //
+        String mem = leerLinea("Membresía (BASICA/INTERMEDIA/PREMIUM): ").toUpperCase();
         int freq = leerEntero("Frecuencia semanal: ");
 
         TipoMembresia tipo;
-        try { tipo = TipoMembresia.valueOf(mem); } catch(Exception e) { tipo = TipoMembresia.BASICA; }
+        try {
+            tipo = TipoMembresia.valueOf(mem);
+        } catch(Exception e) {
+            tipo = TipoMembresia.BASICA;
+            System.out.println("Membresía no válida, se asignó BASICA por defecto");
+        }
 
-        Socio s = new Socio(id, nombre, dni, dir, 223462462, mail, false, true, freq, tipo, "Tren Superior");
+
+
+        Socio s = new Socio(nombre, dni, telefono, false, true, freq, tipo, objetivo);
         socios.altaSocio(s);
         System.out.println("Socio cargado correctamente.");
     }
-
     private static void listarSocios() {
         System.out.println("\n-- Socios --");
         List<Socio> lista = socios.listarSocios();
@@ -190,7 +212,6 @@ public class Main {
     // ======== EMPLEADOS ========
     private static void altaEmpleado() throws DatoInvalidoException {
         System.out.println("\n-- Alta empleado --");
-        int id = leerEntero("ID interno: ");
         String nombre = leerLinea("Nombre: ");
         String dni = leerLinea("DNI: ");
         String dir = leerLinea("Dirección: ");
@@ -200,7 +221,7 @@ public class Main {
         double sueldo = leerDouble("Sueldo: ");
         String especialidad = leerLinea("Especialidad: ");
 
-        Entrenador e = new Entrenador(id, nombre, dni, dir, 22364642, mail, false, legajo, sueldo, especialidad);
+        Entrenador e = new Entrenador(nombre, dni, 22364642, false, legajo, sueldo, especialidad);
         empleados.altaEmpleado(e);
         System.out.println("Empleado cargado.");
     }
@@ -233,7 +254,7 @@ public class Main {
         String desc = leerLinea("Descripción: ");
         String entrenador = leerLinea("Entrenador: ");
 
-        Rutina r = new Rutina(nombre, desc, claveSocio, entrenador);
+        Rutina r = new Rutina();
         gestorRutinas.agregar(r);
         System.out.println("Rutina creada: " + r.toString());
     }
@@ -257,7 +278,7 @@ public class Main {
         Rutina r = obtenerRutinaPorNombre(claveSocio, nombreRutina);
         if (r == null) throw new DatoInvalidoException("Rutina no encontrada");
 
-        GestorEjercicio ge = new GestorEjercicio(r);
+        GestorEjercicios ge = new GestorEjercicios(r);
 
         String nom = leerLinea("Ejercicio: ");
         String des = leerLinea("Descripción: ");
@@ -277,7 +298,7 @@ public class Main {
             System.out.println("Rutina no encontrada");
             return;
         }
-        GestorEjercicio ge = new GestorEjercicio(r);
+        GestorEjercicios ge = new GestorEjercicios(r);
         List<Ejercicio> lista = ge.listar();
         if (lista.isEmpty()) System.out.println("(sin ejercicios)");
         else lista.forEach(e -> System.out.println("• " + e));
@@ -293,7 +314,7 @@ public class Main {
             System.out.println("Rutina no encontrada");
             return;
         }
-        GestorEjercicio ge = new GestorEjercicio(r);
+        GestorEjercicios ge = new GestorEjercicios(r);
         boolean ok = ge.eliminarPorClave(nombreEj.toLowerCase());
         System.out.println(ok ? "Ejercicio eliminado." : "No se encontró ese ejercicio.");
     }

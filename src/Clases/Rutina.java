@@ -11,15 +11,15 @@ public class Rutina implements Claveable {
     private String descripcion;
     private String claveSocio;   // socio dueño de la rutina
     private String entrenador;   // nombre o legajo del entrenador
-    private List<Ejercicio> ejercicios; // lista interna de ejercicios (sin gestión directa)
+    private List<Ejercicio> ejercicios= new ArrayList<>();; // lista interna de ejercicios
 
 
-    public Rutina(String nombre, String descripcion, String claveSocio, String entrenador) {
+    public Rutina(String nombre, String descripcion, String claveSocio, String entrenador, List<Ejercicio> ejercicios) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.claveSocio = claveSocio;
         this.entrenador = entrenador;
-        this.ejercicios = new ArrayList<>();
+        this.ejercicios = ejercicios;
     }
 
     // Se iniciliza tambien de forma independiente para poder utilizarlo en el JSON
@@ -48,6 +48,7 @@ public class Rutina implements Claveable {
     public void setEntrenador(String entrenador) { this.entrenador = entrenador; }
 
     public List<Ejercicio> getEjercicios() { return ejercicios; }
+
     public void setEjercicios(List<Ejercicio> ejercicios) { this.ejercicios = ejercicios; }
 
 
@@ -62,10 +63,10 @@ public class Rutina implements Claveable {
                 "\n - Ejercicios: " + ejercicios;
     }
 
-   /*public String descripcionCorta() {
-        return System.out.println( "\n | Nombre: " + nombre +
-                                   "\n | Socio: " + claveSocio +
-                                   "\n | Ejercicios:  " + ejercicios +
-                                   "\n | Entrenador: " + entrenador);
-    }*/
+    public String descripcionCorta() {
+        return "\n | Nombre: " + nombre +
+                "\n | Socio: " + claveSocio +
+                "\n | Entrenador: " + entrenador +
+                "\n | Ejercicios: " + ejercicios.size() + " ejercicios";
+    }
 }

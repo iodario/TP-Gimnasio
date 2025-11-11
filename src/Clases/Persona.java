@@ -1,12 +1,9 @@
 package Clases;
 
 public abstract class Persona {
-    private int id;
     private String nombre;
     private String dni;
-    private String direccion;
     private int telefono;
-    private String email;
     private boolean eliminado;
 
     // Constructor vacío necesario para permitir crear objetos sin parámetros,
@@ -16,19 +13,13 @@ public abstract class Persona {
     public Persona() {
     }
 
-    public Persona(int id, String nombre, String dni, String direccion, int telefono, String email, boolean eliminado) {
-        this.id = id;
+    public Persona(String nombre, String dni, int telefono, boolean eliminado) {
         this.nombre = nombre;
         this.dni = dni;
-        this.direccion = direccion;
         this.telefono = telefono;
-        this.email = email;
         this.eliminado = eliminado;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public String getNombre() {
         return nombre;
@@ -46,13 +37,6 @@ public abstract class Persona {
         this.dni = dni;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
 
     public int getTelefono() {
         return telefono;
@@ -62,13 +46,6 @@ public abstract class Persona {
         this.telefono = telefono;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public boolean isEliminado() {
         return eliminado;
@@ -82,16 +59,16 @@ public abstract class Persona {
         return nombre + " (DNI: " + dni + ")";
     }
 
+
     @Override
     public String toString() {
-        return "Clases.Persona{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", dni='" + dni + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", telefono=" + telefono +
-                ", email='" + email + '\'' +
-                ", eliminado=" + eliminado +
-                '}';
+        return "\n ==== PERSONA ==== \n" +
+                "\n - Nombre: " + nombre +
+                "\n - Dni: " + dni +
+                "\n - Telefono " + telefono ;
     }
+
+
+
+
 }

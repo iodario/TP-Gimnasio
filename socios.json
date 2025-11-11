@@ -1,0 +1,32 @@
+[
+  {
+    "nombre": "Juan Pérez",
+    "dni": "12345678",
+    "telefono": 1122334455,
+    "eliminado": false,
+    "activo": true,
+    "frecuenciaSemanal": 3,
+    "membresia": "PREMIUM",
+    "objetivo": "Aumentar masa muscular"
+  },
+  {
+    "nombre": "María García",
+    "dni": "87654321",
+    "telefono": 1166778899,
+    "eliminado": false,
+    "activo": true,
+    "frecuenciaSemanal": 5,
+    "membresia": "BASICA",
+    "objetivo": "Bajar de peso"
+  },
+  {
+    "nombre": "Carlos López",
+    "dni": "11222333",
+    "telefono": 1144556677,
+    "eliminado": false,
+    "activo": false,
+    "frecuenciaSemanal": 2,
+    "membresia": "INTERMEDIA",
+    "objetivo": "Mantenimiento"
+  }
+]

@@ -13,8 +13,8 @@ public class Socio extends Persona implements Claveable {
     public Socio() {
     }
 
-    public Socio(int id, String nombre, String dni, String direccion, int telefono, String email, boolean eliminado, boolean activo, int frecuenciaSemanal, TipoMembresia membresia, String objetivo) {
-        super(id, nombre, dni, direccion, telefono, email, eliminado);
+    public Socio(String nombre, String dni, int telefono, boolean eliminado, boolean activo, int frecuenciaSemanal, TipoMembresia membresia, String objetivo) {
+        super(nombre, dni, telefono, eliminado);
         this.activo = activo;
         this.frecuenciaSemanal = frecuenciaSemanal;
         this.membresia = membresia;

@@ -1,0 +1,52 @@
+{
+  "ejercicios": [
+    {
+      "nombre": "sentadillas",
+      "descripcion": "Ejercicio para piernas y glúteos",
+      "repeticiones": 12,
+      "series": 4
+    },
+    {
+      "nombre": "press banca",
+      "descripcion": "Ejercicio para pectorales",
+      "repeticiones": 10,
+      "series": 4
+    },
+    {
+      "nombre": "peso muerto",
+      "descripcion": "Ejercicio completo para espalda y piernas",
+      "repeticiones": 8,
+      "series": 3
+    },
+    {
+      "nombre": "curl bíceps",
+      "descripcion": "Ejercicio para bíceps con mancuernas",
+      "repeticiones": 15,
+      "series": 3
+    },
+    {
+      "nombre": "extensiones tríceps",
+      "descripcion": "Ejercicio para tríceps con polea",
+      "repeticiones": 12,
+      "series": 4
+    },
+    {
+      "nombre": "elevaciones laterales",
+      "descripcion": "Ejercicio para hombros",
+      "repeticiones": 15,
+      "series": 3
+    },
+    {
+      "nombre": "flexiones",
+      "descripcion": "Ejercicio de autocarga para pectorales",
+      "repeticiones": 20,
+      "series": 3
+    },
+    {
+      "nombre": "abdominales",
+      "descripcion": "Ejercicio para zona media",
+      "repeticiones": 25,
+      "series": 4
+    }
+  ]
+}

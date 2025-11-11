@@ -27,6 +27,46 @@ public class Pago implements Claveable {
         this.socioDni = socioDni;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getSocioDni() {
+        return socioDni;
+    }
+
+    public void setSocioDni(String socioDni) {
+        this.socioDni = socioDni;
+    }
+
+    public String getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
+    }
+
+    public double getMonto() {
+        return monto;
+    }
+
+    public void setMonto(double monto) {
+        this.monto = monto;
+    }
+
+    public String getMedioDePago() {
+        return medioDePago;
+    }
+
+    public void setMedioDePago(String medioDePago) {
+        this.medioDePago = medioDePago;
+    }
+
     @Override
     public String getClave() { return id; }
 
@@ -39,5 +79,7 @@ public class Pago implements Claveable {
                 " medio=" + medioDePago +
                 "}";
     }
+
+
 
 }

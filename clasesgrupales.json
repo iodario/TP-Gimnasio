@@ -1,0 +1,34 @@
+{
+  "clasesGrupales": [
+    {
+      "id": "CL001",
+      "nombre": "Crossfit Intensivo",
+      "actividad": "CROSSFIT",
+      "dia": "Lunes",
+      "hora": "18:00",
+      "cupoMax": 15,
+      "entrenadorLegajo": "ENT001",
+      "reservas": []
+    },
+    {
+      "id": "CL002",
+      "nombre": "Yoga Matutino",
+      "actividad": "YOGA",
+      "dia": "Martes",
+      "hora": "08:00",
+      "cupoMax": 20,
+      "entrenadorLegajo": "ENT002",
+      "reservas": []
+    },
+    {
+      "id": "CL003",
+      "nombre": "Funcional Avanzado",
+      "actividad": "FUNCIONAL",
+      "dia": "Miércoles",
+      "hora": "19:30",
+      "cupoMax": 12,
+      "entrenadorLegajo": "ENT001",
+      "reservas": []
+    }
+  ]
+}

@@ -11,7 +11,6 @@ public class Reserva implements Claveable {
     private String socioDni;
     private String claseId;
     private boolean activa = true;
-    // TODO: Ver de agregar "fechaDeReserva"
 
 
     public Reserva() {
