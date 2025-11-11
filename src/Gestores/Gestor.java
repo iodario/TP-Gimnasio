@@ -16,10 +16,6 @@ public class Gestor<T extends Claveable> {
       si la encuentra devuelve el elemento que contiene esa clave, usando getClave( )*/
 
 
-
-
-
-
     public T buscarPorClave(String clave) {
         if (clave == null || clave.trim().isEmpty()) return null;
         String k = clave.trim();
